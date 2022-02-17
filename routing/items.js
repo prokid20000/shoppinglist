@@ -10,7 +10,7 @@ router.get("/", function (req, res) {
 
 /** add item */
 router.post("/", function (req,res){
-    const newItem = { name: req.body.name, price: req.body.price};
+    const newItem = { name: req.body.name, price: req.body.price };
     db.items.push(newItem);
 
     return res.json({ added: newItem});
