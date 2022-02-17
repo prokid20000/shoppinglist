@@ -1,34 +1,38 @@
 const express = require("express");
-const db = require("./fakeDb");
+const db = require("../fakeDb");
 
 const router = express.Router();
 
 /** get all items */
 router.get("/", function (req, res) {
-    return res.json(db.items);
+    return res.json({items: db.items});
 });
 
 /** add item */
 router.post("/", function (req,res){
-    const newItem = { name: req.params.name, price: req.params.price};
-    //db.items.push(newItem);
-    db.items[newItem.name] = newItem;
+    const newItem = { name: req.body.name, price: req.body.price};
+    db.items.push(newItem);
+
     return res.json({ added: newItem});
 });
 
 /** get :name item */
 router.get("/:name", function (req, res){
-    const fetchedItem = db.items[req.params.name];
+    const fetchedItem = db.items.find(
+        element => element.name === req.params.name
+    );
 
     return res.json(fetchedItem);
 });
 
 /** update item in shopping list */
 router.patch("/:name", function(req, res){
-    const fetchedItem = db.items[req.params.name];
+    const fetchedItem = db.items.find(
+        element => element.name === req.params.name
+    );
 
-    for(key in req.params){
-        fetchedItem[key] = req.params[key];
+    for(key in req.body){
+        fetchedItem[key] = req.body[key];
     }
 
     return res.json({updated: fetchedItem});

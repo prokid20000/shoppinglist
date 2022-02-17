@@ -1,6 +1,6 @@
 const express = require("express");
 
-const itemRoute = require("./routing/items");
+const itemRoute = require("./routing/items.js");
 
 const app = express();
 
