@@ -35,6 +35,10 @@ router.patch("/:name", function(req, res){
 });
 
 /** delete item from shopping list */
+router.delete("/:name", function(req,res){
+    db.items = db.items.filter(element => element.name != req.params.name);
+    return res.json({message: "Deleted"});
+})
 
 module.exports = router;
 
