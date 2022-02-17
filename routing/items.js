@@ -35,7 +35,7 @@ router.patch("/:name", function (req, res) {
     );
 
     //conditional for exact keys you want
-    for (key in req.body) {
+    for (let key in req.body) {
         fetchedItem[key] = req.body[key];
     }
 

@@ -55,14 +55,14 @@ describe("GET/items/:name", function () {
 
 /** test items patch */
 describe("PATCH /items/:name", function () {
-  it("Add item on list", async function () {
+  it("Patch item in list", async function () {
     const resp = await request(app)
       .patch(`/items/test`)
       .send({
         name: "birthday",
       });
 
-    expect(resp.body.updated.name).toEqual("birthday");
+    expect(resp.body).toEqual({updated: {name:"birthday", price: 1.00}});
   });
 });
 
